@@ -1,0 +1,33 @@
+<%= form_for(@developer) do |f| %>
+  <% if @developer.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@developer.errors.count, "error") %> prohibited this developer from being saved:</h2>
+
+      <ul>
+      <% @developer.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+ 
+    <%= f.text_field :first_name, :placeholder => :first_name, :class => "input-large" %>
+  </div>
+  <div class="field">
+ 
+    <%= f.text_field :last_name, :placeholder => :last_name, :class => "input-large" %>
+  </div>
+  <div class="field">
+ 
+    <%= f.text_field :email, :placeholder => :email, :class => "input-large" %>
+  </div>
+  <div class="field">
+ 
+    <%= f.text_field :password, :placeholder => :password, :class => "input-large" %>
+  </div>
+  <div class="actions">
+    <%= f.submit :class => "btn" %>
+  </div>
+<% end %>

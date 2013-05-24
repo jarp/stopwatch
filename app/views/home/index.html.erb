@@ -1,0 +1,53 @@
+<%= render 'entries/inline_form' %>
+
+
+
+<div style=" width:100%" id="current-entries"></div>
+<div id="progress-message" ></div>
+
+
+<script>
+$(document).ready(function(){
+	//alert('asdf')
+	     refreshEntries()
+/*
+        
+      $("#new_entry").bind("ajax:success", function(event,xhr,status){
+          console.log(event)
+          refreshEntries();
+          clearForm();
+        });
+
+      $("#new_entry").on("ajax:error", function(event,xhr,status){
+          console.log(event)
+          alert('boom!')
+        });
+
+      $(document).on("ajax:before", function(event,xhr,status){
+        alert('sinding')
+        });
+
+
+        function refreshEntries(){
+          //console.log('loading entires')
+          $('#current-entries').html("loading");
+          $('#current-entries').load('/entries?widget');  
+         }
+
+
+
+        function clearForm(){
+          $('input[type="text"], select').val("");
+          }
+*/
+  $("#entry-form").bind('ajax:beforeSend', function(xhr, settings) {alert('before')})
+   .bind('ajax:success',    function(xhr, data, status) {alert('suc')})
+   .bind('ajax:complete', function(xhr, status) { alert('comp')})
+   .bind('ajax:error', function(xhr, data, status) {alert('error')})
+
+  })
+
+});
+  
+
+</script>

@@ -1,0 +1,40 @@
+<% unless params.has_key? :widget %>   
+<h1>Listing entries</h1>
+<% end %>
+<table class="table table-bordered table-striped table-hover">
+  <tr>
+    <th>Date</th>
+    <th>Time</th>
+    <th>Description</th>
+    <th>Developer</th>
+    <th>Project</th>
+    <th>Category</th>
+    <% unless params.has_key? :widget %>    
+        <th></th>
+    <% end %>
+  </tr>
+
+<% @entries.each do |entry| %>
+  <tr>
+    <td><%= entry.date %></td>
+    <td><%= entry.time %></td>
+    <td><%= entry.description %></td>
+    <td><%= entry.developer %></td>
+    <td><%= entry.project %></td>
+    <td><%= entry.category %></td>
+    <% unless params.has_key? :widget %>    
+        <td>
+        <%= link_to 'Show', entry %> | 
+        <%= link_to 'Edit', edit_entry_path(entry) %> | 
+        <%= link_to 'Destroy', entry, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <% end %>
+
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<% unless params.has_key? :widget %>
+<%= link_to 'New Entry', new_entry_path %>
+<% end %>
