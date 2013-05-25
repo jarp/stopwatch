@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
  
-  #before_filter :require_login, :except => [:login, :authenticate]
+  before_filter :require_login, :except => [:login, :authenticate]
 
   def index
   	@entry = Entry.new
