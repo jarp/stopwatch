@@ -14,6 +14,11 @@ class Entry < ActiveRecord::Base
   validates_presence_of :category_id
 
 	#validate :date_is_legit
+  after_initialize :default_values
+  def default_values
+    d = Time.new
+    self.date ||= Time.new.strftime('%m/%d/%Y')
+  end
 
   def date_is_legit
 
