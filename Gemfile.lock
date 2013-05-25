@@ -37,7 +37,6 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.2)
-    commonjs (0.2.6)
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
@@ -51,11 +50,6 @@ GEM
       jquery-rails
       railties (>= 3.1.0)
     json (1.8.0)
-    less (2.3.2)
-      commonjs (~> 0.2.6)
-    less-rails (2.3.3)
-      actionpack (>= 3.1)
-      less (~> 2.3.1)
     libv8 (3.16.14.1)
     mail (2.5.4)
       mime-types (~> 1.16)
@@ -117,8 +111,6 @@ DEPENDENCIES
   jquery-rails
   jquery-ui-rails
   json
-  less
-  less-rails
   libv8
   pg
   rails (= 3.2.13)

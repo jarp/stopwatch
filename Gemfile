@@ -34,8 +34,8 @@ group :production do
 	gem 'pg'
 	gem 'libv8'
 	gem 'json'
-	gem 'less'
-	gem 'less-rails'
+	#gem 'less'
+	#gem 'less-rails'
 	#gem 'therubyracer'
 end
 # To use ActiveModel has_secure_password
