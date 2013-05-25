@@ -17,7 +17,7 @@
 <% @entries.each do |entry| %>
   <tr>
     <td><%= entry.date %></td>
-    <td><%= entry.time %> / <%= entry.payment %></td>
+    <td><%= entry.hours %> / <%= entry.payment %></td>
     <td><%= truncate(entry.description, :length => 20) %></td>
     <td><%= entry.developer.first_name %></td>
     <td><%= entry.project %></td>

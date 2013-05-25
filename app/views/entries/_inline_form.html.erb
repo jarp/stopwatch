@@ -16,7 +16,7 @@
 
     <%= f.text_field :date, :placeholder => "Date", :class => "datepicker input-small" %>
 
-    <%= f.text_field :hours, :class => "input-xsmall", :placeholder => "Time | 1h 30m "%>
+    <%= f.text_field :hours, :class => "skinny", :placeholder => "Time | 1h 30m "%>
 
     
     <%= f.collection_select :project_id, Project.all, :id, :name, {} %>

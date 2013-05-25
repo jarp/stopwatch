@@ -7,7 +7,7 @@ class Entry < ActiveRecord::Base
   
   attr_accessible :date, :description, :hours, :project_id, :developer_id, :category_id
 
-  validates :date, :description, :time, :presence => true
+  validates :date, :description, :hours, :presence => true
   #validates :time, :numericality =>  :true
   
 
