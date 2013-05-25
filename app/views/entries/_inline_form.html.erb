@@ -15,14 +15,14 @@
 
 
     <%= f.text_field :date, :placeholder => "Date", :class => "datepicker input-small" %>
-    <%= f.select :time, options_for_select(15.step(180, 15)),{}, {:class => "skinny"} %>
+    <%= f.select :time, options_for_select(15.step(180, 15)),{}, {:class => "skinny to-clear"} %>
     
 
     
     <%= f.collection_select :project_id, Project.all, :id, :name, {} %>
     <%= f.collection_select :category_id, Category.all, :id, :name, {} %>
 
-    <%= f.text_field :description, :placeholder => "What did you do?", :class=> "input-xlarge", :cols=> "60", :rows => "1" %>
+    <%= f.text_field :description, :placeholder => "What did you do?", :class=> "input-xlarge to-clear", :cols=> "60", :rows => "1" %>
 
 
     <%= f.submit "Add", :class => "btn", :id => 'add-hours-btn' %>
