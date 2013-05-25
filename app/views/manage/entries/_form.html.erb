@@ -1,0 +1,55 @@
+<%= form_for @entry, :html => {} do |f| %>
+  <% if @entry.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@entry.errors.count, "error") %> prohibited this entry from being saved:</h2>
+
+      <ul>
+      <% @entry.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+
+  <div class="field">
+    
+  </div>
+
+  <div class="field">
+    <%= f.text_field :date, :placeholder => "your date", :class => "datepicker" %>
+  </div>
+
+  <div class="field">
+    <%= f.text_field :time, :placeholder => "Time workded (in min)" %>
+  </div>
+
+
+  <div class="field">
+    <%= f.text_area :description, :placeholder => "What did you do?", :class=> "input-large" %>
+  </div>  
+
+  <div class="control-group">
+    <%= f.label :developer_id, :class => "control-label" %>
+      <div class="controls">
+        <%= f.collection_select :developer_id, Developer.all, :id, :email %>
+      </div>
+  </div>
+  
+  <div class="field">
+    <%= f.label :project %>
+    <%= f.collection_select :project_id, Project.all, :id, :name %>
+  </div>
+  <div class="field">
+    <%= f.label :category %>
+    <%= f.collection_select :category_id, Category.all, :id, :name %>
+  </div>
+  
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+
+

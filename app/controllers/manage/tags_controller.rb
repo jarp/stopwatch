@@ -1,4 +1,4 @@
-class TagsController < ApplicationController
+class Manage::TagsController < ApplicationController
   # GET /tags
   # GET /tags.json
   

@@ -7,24 +7,20 @@
 
 
 <script>
-$(document).ready(function(){
-	//alert('asdf')
-	     refreshEntries()
-/*
-        
-      $("#new_entry").bind("ajax:success", function(event,xhr,status){
-          console.log(event)
+    $( document ).ready(function() {
+      
+      refreshEntries();
+      
+      $('#new_entry').on('ajax:success', function(event, xhr, status) {
+        // insert the failure message inside the "#account_settings" element
           refreshEntries();
-          clearForm();
+          clearForm()
         });
 
-      $("#new_entry").on("ajax:error", function(event,xhr,status){
-          console.log(event)
-          alert('boom!')
-        });
-
-      $(document).on("ajax:before", function(event,xhr,status){
-        alert('sinding')
+      $('#new_entry').on('ajax:error', function(event, xhr, status) {
+        // insert the failure message inside the "#account_settings" element
+         
+         alert('something wicked this way comes...')
         });
 
 
@@ -39,15 +35,12 @@ $(document).ready(function(){
         function clearForm(){
           $('input[type="text"], select').val("");
           }
-*/
-  $("#entry-form").bind('ajax:beforeSend', function(xhr, settings) {alert('before')})
-   .bind('ajax:success',    function(xhr, data, status) {alert('suc')})
-   .bind('ajax:complete', function(xhr, status) { alert('comp')})
-   .bind('ajax:error', function(xhr, data, status) {alert('error')})
 
-  })
 
-});
-  
+    });
+ 
 
-</script>
+
+    </script>
+
+

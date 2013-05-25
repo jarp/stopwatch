@@ -17,13 +17,11 @@
     <td><%= developer.last_name %></td>
     <td><%= developer.email %></td>
     <td><%= developer.password %></td>
-    <td><%= link_to 'Show', developer %></td>
-    <td><%= link_to 'Edit', edit_developer_path(developer) %></td>
-    <td><%= link_to 'Destroy', developer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <%= debug edit_manage_developer_path %>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Developer', new_developer_path %>
+<%= link_to 'New Developer', new_manage_developer_path %>

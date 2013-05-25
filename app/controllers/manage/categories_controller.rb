@@ -1,4 +1,4 @@
-class CategoriesController < ApplicationController
+class Manage::CategoriesController < ApplicationController
   # GET /categories
   # GET /categories.json
   def index

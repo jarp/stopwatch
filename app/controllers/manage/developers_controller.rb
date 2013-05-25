@@ -1,4 +1,4 @@
-class DevelopersController < ApplicationController
+class Manage::DevelopersController < ApplicationController
   # GET /developers
   # GET /developers.json
   def index

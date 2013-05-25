@@ -4,11 +4,13 @@ Stopwatch::Application.routes.draw do
   get "home/authenticate"
   get "home/logout"
 
+  
+
   resources :entries
-  resources :developers
-  resources :projects
-  resources :categories
-  resources :tags
+
+  namespace :manage do
+    resources :categories, :tags, :projects, :developers, :entries, :home
+  end
 
   root :to => 'home#index'
 
