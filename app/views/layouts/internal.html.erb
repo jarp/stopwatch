@@ -34,13 +34,27 @@
        <a class="brand" href="/">Multiplied by Infinity</a>
        <div class="nav-collapse collapse" id="main-menu">
         <ul class="nav" id="main-menu-left">
-          <li><a  href="/hours">Add Hours</a></li>
-          <li><a href="/report">Past Hours</a></li>
+          <li><a  href="/">Add Hours</a></li>
+          
           
         </ul>
         <ul class="nav pull-right" id="main-menu-right">
-          <li><a rel="tooltip" target="_blank" href="/manage/home" title=""  
-            data-original-title="Admin">Administrate <i class="icon-share-alt"></i></a></li>
+
+          <% unless session[:user] %>
+          <li>
+            <a rel="tooltip" target="_blank" href="/login" title=""  
+            data-original-title="Admin">Login <i class="icon-share-alt"></i></a>
+          </li> 
+          <% else %>
+          <li>
+            <a rel="tooltip" target="_blank" href="/logout" title=""  
+            data-original-title="Admin">Logout <i class="icon-share-alt"></i></a>
+          </li>          
+           <% end %> 
+          <li>
+            <a rel="tooltip" target="_blank" href="/manage/home" title=""  
+            data-original-title="Admin">Administrate <i class="icon-share-alt"></i></a>
+          </li>
           
         </ul>
        </div>
@@ -49,6 +63,18 @@
  </div>
 
     <div class="container">
+
+      <% if flash[:message] %>
+        <div class="alert alert-success">
+          <%= flash[:message] %>
+        </div>
+      <% end %>
+
+      <% if flash[:error] %>
+        <div class="alert alert-error">
+          <%= flash[:error] %>
+        </div>
+      <% end %>
 
 
       <%= yield %>
@@ -68,10 +94,5 @@
 
 
 
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    
-  
 
 </body></html>

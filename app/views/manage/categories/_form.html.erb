@@ -1,4 +1,5 @@
-<%= form_for(@category) do |f| %>
+<%= form_for [:manage, @category] do |f| %>
+
   <% if @category.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@category.errors.count, "error") %> prohibited this category from being saved:</h2>
@@ -14,10 +15,14 @@
   <div class="field">
     <%= f.text_field :name, :placeholder => :name, :class => 'input-large' %>
   </div>
-  <div class="field">
-    
+  <div class="field"> 
     <%= f.text_field :code, :placeholder => :code, :class => 'input-small'%>
   </div>
+
+    <div class="field"> 
+    <%= f.number_field :rate, :placeholder => :rate, :class => 'input-small'%>
+  </div>
+  
   <div class="actions">
     <%= f.submit :class => 'btn' %>
   </div>

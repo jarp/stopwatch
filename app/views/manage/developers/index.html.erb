@@ -17,7 +17,9 @@
     <td><%= developer.last_name %></td>
     <td><%= developer.email %></td>
     <td><%= developer.password %></td>
-    <%= debug edit_manage_developer_path %>
+    <td><%= link_to 'Show', manage_developer_path(developer) %></td>
+    <td><%= link_to 'Edit', edit_manage_developer_path(developer) %></td>
+    <td><%= link_to 'Destroy', manage_developer_path(developer), method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>

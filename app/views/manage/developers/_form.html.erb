@@ -1,4 +1,5 @@
-<%= form_for(@developer) do |f| %>
+<%= form_for([:manage, @developer]) do |f| %>
+ 
   <% if @developer.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@developer.errors.count, "error") %> prohibited this developer from being saved:</h2>

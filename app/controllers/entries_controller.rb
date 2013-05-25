@@ -1,5 +1,6 @@
 class EntriesController < ApplicationController
 
+  before_filter :require_login
     
   # GET /entries
   # GET /entries.json
@@ -51,6 +52,7 @@ class EntriesController < ApplicationController
     
     @entry = Entry.new(params[:entry])
     @entry.date = Date.strptime(params[:entry][:date], '%m/%d/%Y')
+    @entry.developer_id = session[:user][:id]
 
 
 

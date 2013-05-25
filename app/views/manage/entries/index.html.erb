@@ -24,9 +24,9 @@
     <td><%= entry.category %></td>
     <% unless params.has_key? :widget %>    
         <td>
-        <%= link_to 'Show', entry %> | 
-        <%= link_to 'Edit', edit_entry_path(entry) %> | 
-        <%= link_to 'Destroy', entry, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%= link_to 'Show', manage_entry_path(entry) %> | 
+        <%= link_to 'Edit', edit_manage_entry_path(entry) %> | 
+        <%= link_to 'Destroy', manage_entry_path(entry), method: :delete, data: { confirm: 'Are you sure?' } %></td>
     <% end %>
 
   </tr>
@@ -35,6 +35,5 @@
 
 <br />
 
-<% unless params.has_key? :widget %>
-<%= link_to 'New Entry', new_entry_path %>
-<% end %>
+
+<%= link_to 'New Entry', new_manage_entry_path %>

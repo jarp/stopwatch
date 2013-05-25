@@ -1,8 +1,8 @@
 Stopwatch::Application.routes.draw do
-  get "home/index"
-  get "home/login"
-  get "home/authenticate"
-  get "home/logout"
+  get "/index" => 'home#index', :as => :home
+  get "/login" => 'home#login', :as => :login
+  post "/authenticate" => 'home#authenticate', :as => :process_login
+  get "/logout" => 'home#logout', :as => :logout
 
   
 

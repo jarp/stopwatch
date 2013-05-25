@@ -1,3 +1,5 @@
+<div class="well">
+
 <%= form_for( @entry,:remote => :true, :html => {:'data-type' => 'json'}) do |f| %>
   <% if @entry.errors.any? %>
     <div id="error_explanation">
@@ -12,24 +14,22 @@
   <% end %>
 
 
-    <%= f.text_field :date, :placeholder => "date", :class => "datepicker input-small" %>
-    <%= f.text_field :time, :placeholder => "Time (min)", :class=>"input-small" %>
-    <%= f.text_area :description, :placeholder => "What did you do?", :class=> "input-xlarge", :cols=> "60", :rows => "1" %>
+    <%= f.text_field :date, :placeholder => "Date", :class => "datepicker input-small" %>
+    <%= f.select :time, options_for_select(15.step(180, 15)),{}, {:class => "skinny"} %>
+    
 
-    <br/>
     
-    <%= f.collection_select :developer_id, Developer.all, :id, :email %>
-  
-    
-    <%= f.collection_select :project_id, Project.all, :id, :name %>
-    
-    <%= f.collection_select :category_id, Category.all, :id, :name %>
+    <%= f.collection_select :project_id, Project.all, :id, :name, {}, {:class => "skinny"} %>
+    <%= f.collection_select :category_id, Category.all, :id, :name, {}, {:class => "skinny"} %>
 
-    <br/>
-    <%= f.submit :class => "btn", :id => 'add-hours-btn' %>
+    <%= f.text_field :description, :placeholder => "What did you do?", :class=> "input-xlarge", :cols=> "60", :rows => "1" %>
+
+
+    <%= f.submit "Add", :class => "btn", :id => 'add-hours-btn' %>
 
 
 <% end %>
 
 
 
+</div>
