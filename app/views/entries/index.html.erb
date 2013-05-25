@@ -17,11 +17,11 @@
 <% @entries.each do |entry| %>
   <tr>
     <td><%= entry.date %></td>
-    <td><%= entry.time %></td>
-    <td><%= entry.description %></td>
-    <td><%= entry.developer %></td>
+    <td><%= entry.time %> / <%= entry.payment %></td>
+    <td><%= truncate(entry.description, :length => 20) %></td>
+    <td><%= entry.developer.first_name %></td>
     <td><%= entry.project %></td>
-    <td><%= entry.category %></td>
+    <td><%= entry.category.code %></td>
     <% unless params.has_key? :widget %>    
         <td>
         <%= link_to 'Show', manage_entry_path(entry) %> | 
