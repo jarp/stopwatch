@@ -5,7 +5,7 @@ class Entry < ActiveRecord::Base
   belongs_to :project
   belongs_to :category
   
-  attr_accessible :date, :description, :hours, :project_id, :developer_id, :category_id
+  attr_accessible :date, :description, :time,  :hours, :project_id, :developer_id, :category_id
 
   validates :date, :description, :hours, :presence => true
   #validates :time, :numericality =>  :true
