@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   
-  layout 'internal'
+  layout 'xby8'
   		
 
   def require_login

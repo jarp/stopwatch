@@ -1,6 +1,6 @@
 <h1>Listing projects</h1>
 
-<table>
+<table class="table table-bordered table-striped table-hover">
   <tr>
     <th>Name</th>
     <th>Description</th>
@@ -13,13 +13,13 @@
   <tr>
     <td><%= project.name %></td>
     <td><%= project.description %></td>
-    <td><%= link_to 'Show', project %></td>
-    <td><%= link_to 'Edit', edit_project_path(project) %></td>
-    <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Show', manage_project_path(project) %></td>
+    <td><%= link_to 'Edit', edit_manage_project_path(project) %></td>
+    <td><%= link_to 'Destroy', manage_project_path(project), method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Project', new_project_path %>
+<%= link_to 'New Project', new_manage_project_path %>
