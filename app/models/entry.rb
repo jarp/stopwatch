@@ -5,7 +5,7 @@ class Entry < ActiveRecord::Base
   belongs_to :project
   belongs_to :category
   
-  attr_accessible :date, :description, :time,  :hours, :project_id, :developer_id, :category_id
+  attr_accessible :date, :description, :time,  :hours, :project_id, :developer_id, :category_id, :invoice_date
 
   validates :date, :description, :hours, :presence => true
   #validates :time, :numericality =>  :true
@@ -15,8 +15,20 @@ class Entry < ActiveRecord::Base
   validates_presence_of :project_id
   validates_presence_of :category_id
 
-	#validate :date_is_legit
-  after_initialize :default_values
+	after_initialize :default_values
+  
+
+  scope :open, where(:invoice_date => nil)
+
+
+  def invoiced?
+    if invoice_date.nil?
+      false
+    else
+      true
+    end
+  end
+
   def default_values
     d = Time.new
     self.date ||= Time.new.strftime('%m/%d/%Y')

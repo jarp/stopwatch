@@ -1,6 +1,15 @@
 <%= render 'entries/inline_form' %>
 
 
+<div class="well">
+  <% @developers.each do | d | %>
+  <div class="dev-check" style="display:inline; padding:4px; margin-right:10px">
+  <input id="<%= d.id %>" type="checkbox" class="dev-filter" 
+      <% if session[:user][:id] == d.id %> checked="true"<% end %> > <%= d.first_name %>
+</div>
+  <% end %>
+</div>
+
 
 <div style=" width:100%" id="current-entries"></div>
 <div id="progress-message" ></div>
@@ -27,15 +36,39 @@
         function refreshEntries(){
           //console.log('loading entires')
           $('#current-entries').html("loading");
-          $('#current-entries').load('/entries?widget');  
+          $('#current-entries').load('/entries?widget', pauseFilter());  
          }
 
-
+          function pauseFilter(el) { 
+              setTimeout(
+                  function() { filterEntries(); }, 500);
+                  } 
 
         function clearForm(){
           $('input.to-clear').val("");
           }
 
+        function filterEntries(){
+            var toHide = $('input.dev-filter:not(:checked)') 
+            var toShow = $('input.dev-filter:checked') 
+
+            console.log(toShow)
+            console.log(toHide)
+
+            console.log ( $('div') )  
+
+            toHide.each(function(){
+              $('tr').filter('#'+ $(this).attr('id')).fadeOut()
+            })
+            toShow.each(function(){
+              $('tr').filter('#'+ $(this).attr('id')).fadeIn()
+            })            
+          }
+
+
+          $('input.dev-filter').click(function(){
+              filterEntries();
+          })
 
     });
  

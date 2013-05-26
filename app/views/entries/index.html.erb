@@ -9,25 +9,26 @@
     <th>Developer</th>
     <th>Project</th>
     <th>Category</th>
-    <% unless params.has_key? :widget %>    
         <th></th>
+    <% unless params.has_key? :widget %>    
     <% end %>
   </tr>
 
 <% @entries.each do |entry| %>
-  <tr>
+  <tr id = "<%= entry.developer.id %>">
     <td><%= entry.date %></td>
     <td><%= entry.hours %> / <%= entry.payment %></td>
     <td><%= truncate(entry.description, :length => 20) %></td>
     <td><%= entry.developer.first_name %></td>
     <td><%= entry.project %></td>
     <td><%= entry.category.code %></td>
+    <td>
+    <%= button_to 'Show', manage_entry_path(entry), :class => 'btn btn-small', :method => :get %>
     <% unless params.has_key? :widget %>    
-        <td>
-        <%= link_to 'Show', manage_entry_path(entry) %> | 
         <%= link_to 'Edit', edit_manage_entry_path(entry) %> | 
-        <%= link_to 'Destroy', manage_entry_path(entry), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%= link_to 'Destroy', manage_entry_path(entry), method: :delete, data: { confirm: 'Are you sure?' } %>
     <% end %>
+    </td>
 
   </tr>
 <% end %>

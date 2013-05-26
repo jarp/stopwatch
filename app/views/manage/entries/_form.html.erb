@@ -46,6 +46,11 @@
     <%= f.collection_select :category_id, Category.all, :id, :name %>
   </div>
   
+  <div class="field">
+    <%= f.label :invoice_date %>
+    <%= f.text_field :invoice_date, :placeholder => "Invoice Date", :class => "datepicker" %>
+  </div>
+  
   <div class="actions">
     <%= f.submit %>
   </div>

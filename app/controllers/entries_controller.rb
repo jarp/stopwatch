@@ -5,7 +5,7 @@ class EntriesController < ApplicationController
   # GET /entries
   # GET /entries.json
   def index
-    @entries = Entry.all
+    @entries = Entry.open
 
     if params.has_key? :widget
       show_layout = false

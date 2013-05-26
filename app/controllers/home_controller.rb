@@ -4,6 +4,7 @@ class HomeController < ApplicationController
 
   def index
   	@entry = Entry.new
+    @developers = Developer.all
   end
 
   def login

@@ -51,7 +51,7 @@ class Manage::EntriesController < ApplicationController
     
     @entry = Entry.new(params[:entry])
     @entry.date = Date.strptime(params[:entry][:date], '%m/%d/%Y')
-
+    
 
 
     respond_to do |format|
@@ -70,6 +70,14 @@ class Manage::EntriesController < ApplicationController
   # PUT /entries/1.json
   def update
     @entry = Entry.find(params[:id])
+    #@entry.date = Date.strptime(params[:entry][:date], '%m/%d/%Y')
+    unless  params[:entry][:invoice_date].nil?
+      puts "date submitted"
+      params[:entry][:invoice_date] = Date.strptime(params[:entry][:invoice_date], '%m/%d/%Y')
+      
+    end
+
+
 
     respond_to do |format|
       if @entry.update_attributes(params[:entry])
