@@ -1,23 +1,13 @@
 class Entry < ActiveRecord::Base
-
+  attr_accessible :date, :description, :time,  :hours, :project_id, :developer_id, :category_id, :invoice_date
 
   belongs_to :developer
   belongs_to :project
   belongs_to :category
-  
-  attr_accessible :date, :description, :time,  :hours, :project_id, :developer_id, :category_id, :invoice_date
 
-  validates :date, :description, :hours, :presence => true
-  #validates :time, :numericality =>  :true
-  
-
-  validates_presence_of :developer_id
-  validates_presence_of :project_id
-  validates_presence_of :category_id
+  validates :date, :description, :hours,:developer_id, :project_id, :category_id,  :presence => true
 
 	after_initialize :default_values
-  
-
   scope :open, where(:invoice_date => nil)
 
 
@@ -33,6 +23,7 @@ class Entry < ActiveRecord::Base
     d = Time.new
     self.date ||= Time.new.strftime('%m/%d/%Y')
   end
+  
 
   def date_is_legit
     errors.add(:date, "must be a valid date but was [#{date}]") 
@@ -48,7 +39,10 @@ class Entry < ActiveRecord::Base
     
     break_up = self.hours.split(' ')
 
-    if break_up.count == 2
+    if self.hours.blank?
+      h = 0
+      m = 0
+    elsif break_up.count == 2
       h =  break_up[0].sub('h', '').to_i
       m =  break_up[1].sub('m', '').to_i
     elsif break_up[0].index('h') 
