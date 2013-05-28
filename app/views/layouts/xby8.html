@@ -30,6 +30,24 @@
   <%= render 'global/navbar' %>
 
     <div class="container">
+
+      <% if flash[:error] %>
+        <div class="alert alert-error">
+          <a class="close">×</a>
+          <%= flash[:error] %>
+          </div>
+        
+      <% end %>
+
+      <% if flash[:message] %>
+        <div class="alert alert-success">
+          <a class="close">×</a>
+          <%= flash[:message] %>
+          </div>
+        
+      <% end %>
+
+
       <%= yield %>
     </div>
 
