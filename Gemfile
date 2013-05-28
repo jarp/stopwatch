@@ -8,7 +8,7 @@ gem 'rails', '3.2.13'
 
 
 group :test do 
-=begin
+#=begin
   gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
   gem 'guard-rspec'
   gem 'growl'
@@ -18,7 +18,7 @@ group :test do
   gem 'launchy'
   gem 'factory_girl_rails'
   gem 'rspec-rails'
-=end
+#=end
 end
 # Gems used only for assets and not required
 # in production environments by default.

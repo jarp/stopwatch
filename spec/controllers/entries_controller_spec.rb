@@ -7,6 +7,7 @@ let(:valid_post) { {
                     entry: {
                     date:"3/23/2013", 
                     hours: '1h 45m', 
+                    description: "my test work",
                     project_id: @project.id, 
                     category_id: @category.id, 
                     developer_id: @developer.id
@@ -34,9 +35,9 @@ let(:valid_post) { {
       request.accept = 'application/json'
       
       post 'create', valid_post, valid_session
-      #pp response
+      #pp response.body
 
-      expect(response.code).to eq "200"
+      expect(response.code).to eq "201"
       
     end
 
