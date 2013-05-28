@@ -5,11 +5,17 @@ class Entry < ActiveRecord::Base
   belongs_to :project
   belongs_to :category
 
+
   validates :date, :description, :hours,:developer_id, :project_id, :category_id,  :presence => true
 
 	after_initialize :default_values
+  #before_validation :convert_dates
+
   scope :open, where(:invoice_date => nil)
 
+  def convert_dates
+    self.date = Date.strptime(self.date, '%m/%d/%Y')
+  end
 
   def invoiced?
     if invoice_date.nil?
@@ -27,7 +33,7 @@ class Entry < ActiveRecord::Base
 
   def date_is_legit
     errors.add(:date, "must be a valid date but was [#{date}]") 
-    	if ( (Date.parse( date ) rescue ArgumentError) == ArgumentError)
+    	if ( (Date.strptime(date, '%m/%d/%Y') rescue ArgumentError) == ArgumentError)
     end
   end
 
