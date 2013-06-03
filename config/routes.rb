@@ -1,15 +1,21 @@
 Stopwatch::Application.routes.draw do
+  resources :invoices
+
+
   get "/index" => 'home#index', :as => :home
   get "/login" => 'home#login', :as => :login
   post "/authenticate" => 'home#authenticate', :as => :process_login
   get "/logout" => 'home#logout', :as => :logout
 
-  
-
   resources :entries
+  
+  match '/manage/invoices/current/:project_id' => 'manage/invoices#current'
+  match '/manage/invoices/addEntry/:entry_id' => 'manage/invoices#addEntry'
+  match '/manage/invoices/removeEntry/:entry_id' => 'manage/invoices#removeEntry'
+  match '/manage/entries/invoice/:id' => 'manage/entries#invoice'
 
   namespace :manage do
-    resources :categories, :tags, :projects, :developers, :entries, :home
+    resources :categories, :tags, :projects, :developers, :entries, :home, :invoices
   end
 
   root :to => 'home#index'

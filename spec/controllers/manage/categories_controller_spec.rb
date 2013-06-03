@@ -5,6 +5,14 @@ describe Manage::CategoriesController do
 let(:valid_attributes) { { name: "Test Category", code: 'test',  rate: 50  } }
 let(:valid_session) { { user: {id: 1, email: 'test@test.com', name: 'tester'} } }
 
+before(:all) do 
+	Category.destroy_all
+end
+
+after(:all) do 
+	Category.destroy_all
+end
+
 context "user is logged in " do
 
 	describe "GET index" do

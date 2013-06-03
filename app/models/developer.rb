@@ -3,6 +3,7 @@ class Developer < ActiveRecord::Base
   validates :email, :first_name, :last_name, :password, :presence => :true
 
   has_many :entries
+  has_many :invoices, :dependent => :destroy
   
 
   def to_s 

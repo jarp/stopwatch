@@ -1,6 +1,21 @@
 class Manage::EntriesController < ApplicationController
 
+  
+  def invoice
     
+
+    @entry = Entry.find(params[:id])    
+    
+    @entry.invoice_date = Time.now
+   if @entry.save
+        redirect_to manage_entries_path
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @entry.errors, status: :unprocessable_entity }
+      end
+  end
+
+
   # GET /entries
   # GET /entries.json
   def index
@@ -52,8 +67,6 @@ class Manage::EntriesController < ApplicationController
     @entry = Entry.new(params[:entry])
     @entry.date = Date.strptime(params[:entry][:date], '%m/%d/%Y')
     
-
-
     respond_to do |format|
       if @entry.save
         format.html { redirect_to manage_entry_path( @entry ), notice: 'Entry was successfully created.' }
@@ -70,7 +83,11 @@ class Manage::EntriesController < ApplicationController
   # PUT /entries/1.json
   def update
     @entry = Entry.find(params[:id])
-    #@entry.date = Date.strptime(params[:entry][:date], '%m/%d/%Y')
+    
+    unless  params[:entry][:date].nil?
+    params[:entry][:date] = Date.strptime(params[:entry][:date], '%m/%d/%Y')
+    end
+
     unless  params[:entry][:invoice_date].nil?
       puts "date submitted"
       params[:entry][:invoice_date] = Date.strptime(params[:entry][:invoice_date], '%m/%d/%Y')

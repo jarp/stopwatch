@@ -3,6 +3,7 @@
 <% end %>
 <table class="table table-bordered table-striped table-hover">
   <tr>
+    <th></th>
     <th>Date</th>
     <th>Time</th>
     <th>Description</th>
@@ -16,6 +17,7 @@
 
 <% @entries.each do |entry| %>
   <tr id = "<%= entry.developer.id %>">
+    <td><%= check_box_tag "entry-#{entry.id}", entry.id,  false, {:class=> "entry-checkbox"} %></td>
     <td><%= entry.date %></td>
     <td><%= entry.hours %> / <%= entry.payment %></td>
     <td><%= truncate(entry.description, :length => 20) %></td>
@@ -39,3 +41,49 @@
 <% unless params.has_key? :widget %>
 <%= link_to 'New Entry', new_manage_entry_path %>
 <% end %>
+
+
+
+<script>
+$( document ).ready(function() {
+
+    function setRemoteMessage(msg){
+        $('div#remote-message').html(msg).fadeIn();
+       // console.log("message is: " + msg)
+       // console.log($('div.remote-message'))
+
+    }
+
+    $('.entry-checkbox').change(function(){
+        var entryId = $(this).val();
+        var path = '/manage/invoices/addEntry/'+entryId + '.json';
+        console.log(path)
+        
+
+        if ( $(this).is(':checked') ) {
+            
+
+            $.ajax({
+                url: path,
+                beforeSend: function ( xhr ) {
+                    //xhr.overrideMimeType("application/json; charset=x-user-defined");
+                    },
+                error: function(response){
+                    alert('bad!');
+                    console.log(response.status)
+                    },
+                success: function(response) {
+                    var count = 2;
+                    console.log(response) 
+                    setRemoteMessage("Entry has been added to your invoice! There are now " + response + " entries added");
+                    
+                    }
+        });
+
+
+        }
+        });
+
+
+});
+</script>

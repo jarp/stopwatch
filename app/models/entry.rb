@@ -4,6 +4,7 @@ class Entry < ActiveRecord::Base
   belongs_to :developer
   belongs_to :project
   belongs_to :category
+  belongs_to :invoice
 
 
   validates :date, :description, :hours,:developer_id, :project_id, :category_id,  :presence => true

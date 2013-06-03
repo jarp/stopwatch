@@ -10,14 +10,18 @@
   <% end %>
 </div>
 
+<div id="remote-message" class="alert alert-success" style="display:none"></div>
+
 
 <div style=" width:100%" id="current-entries"></div>
 <div id="progress-message" ></div>
 
 
 <script>
-    $( document ).ready(function() {
-      
+  $( document ).ready(function() {
+    
+    // Basic layout of entries
+
       refreshEntries();
       
       $('#new_entry').on('ajax:success', function(event, xhr, status) {
@@ -52,10 +56,9 @@
             var toHide = $('input.dev-filter:not(:checked)') 
             var toShow = $('input.dev-filter:checked') 
 
-            console.log(toShow)
-            console.log(toHide)
-
-            console.log ( $('div') )  
+            //console.log(toShow)
+            //console.log(toHide)
+            //console.log ( $('div') )  
 
             toHide.each(function(){
               $('tr').filter('#'+ $(this).attr('id')).fadeOut()
