@@ -1,5 +1,4 @@
 Stopwatch::Application.routes.draw do
-  resources :invoices
 
 
   get "/index" => 'home#index', :as => :home
@@ -7,7 +6,6 @@ Stopwatch::Application.routes.draw do
   post "/authenticate" => 'home#authenticate', :as => :process_login
   get "/logout" => 'home#logout', :as => :logout
 
-  resources :entries
   
   match '/manage/invoices/current/:project_id' => 'manage/invoices#current'
   match '/manage/invoices/addEntry/:entry_id' => 'manage/invoices#addEntry'
@@ -17,6 +15,9 @@ Stopwatch::Application.routes.draw do
   match '/manage/invoices/submit/:id' => 'manage/invoices#submit'
   match '/manage/invoices/unsubmit/:id' => 'manage/invoices#unsubmit'
 
+  resources :entries
+  resources :invoices
+  
   namespace :manage do
     resources :categories, :tags, :projects, :developers, :entries, :home, :invoices
   end
