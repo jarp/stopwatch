@@ -15,54 +15,6 @@
 
 body { padding-top: 60px; } 
 
-.one {
-    position: relative;
-}
-.one .bsa_it_ad {
-    background: none repeat scroll 0 0 #F9F9F9;
-    border: 1px solid #E1E1E1;
-    display: block;
-    font-family: helvetica,arial,sans-serif;
-    line-height: 100%;
-    padding: 15px;
-    position: relative;
-}
-.one .bsa_it_ad a {
-    text-decoration: none;
-}
-.one .bsa_it_ad a:hover {
-    text-decoration: none;
-}
-.one .bsa_it_ad .bsa_it_t {
-    color: #212121;
-    display: block;
-    font-size: 12px;
-    font-weight: bold;
-    line-height: 125%;
-    padding: 0 0 5px;
-}
-.one .bsa_it_ad .bsa_it_d {
-    color: #434343;
-    display: block;
-    font-size: 12px;
-    line-height: 135%;
-}
-.one .bsa_it_ad .bsa_it_i {
-    float: left;
-    margin: 0 15px 10px 0;
-}
-.one .bsa_it_p {
-    bottom: 10px;
-    display: block;
-    position: absolute;
-    right: 15px;
-    text-align: right;
-}
-.one .bsa_it_p a {
-    color: #666666;
-    font-size: 10px;
-    text-decoration: none;
-}
-.one .bsa_it_ad .bsa_it_p a:hover {
-    font-style: italic;
-}
+
+div#remote-message a{color:#fff;}
+div#remote-message a:visited{color:#fff;}

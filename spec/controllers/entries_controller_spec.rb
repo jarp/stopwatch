@@ -15,6 +15,7 @@ let(:valid_post) { {
                     } }
   
   before(:all) do 
+    Entry.destroy_all
     @developer = FactoryGirl.create(:developer)
     @project = FactoryGirl.create(:project)
     @category = FactoryGirl.create(:category)
@@ -25,6 +26,14 @@ let(:valid_post) { {
     @category.destroy
     @developer.destroy
   end
+
+
+    it "returns a list of all entries that have not been invoiced" do 
+
+      get :index, {}, valid_session
+      expect(assigns(:entries)).to_not be_nil
+      pp assigns(:entries)
+    end
 
 
 

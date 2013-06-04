@@ -2,15 +2,36 @@
 
 
 <div class="well">
-  <% @developers.each do | d | %>
-  <div class="dev-check" style="display:inline; padding:4px; margin-right:10px">
-  <input id="<%= d.id %>" type="checkbox" class="dev-filter" 
-      <% if session[:user][:id] == d.id %> checked="true"<% end %> > <%= d.first_name %>
-</div>
-  <% end %>
+
+  <div class="span5">
+
+    <% @developers.each do | d | %>
+     <div class="dev-check" style="display:inline; padding:4px; margin-right:10px">
+        <input id="<%= d.id %>" type="checkbox" class="dev-filter" 
+        <% if session[:user][:id] == d.id %> checked="true"<% end %> > <%= d.first_name %>
+      </div>
+    <% end %>
+
+  </div>
+
+  <div class="span5 pull-right">
+
+    <% @projects.each do | project | %>
+     <div class="project-check" style="display:inline; padding:4px; margin-right:10px">
+        <input id="<%= project.id %>" type="checkbox" class="project-filter" >
+        <%= project.name %>
+
+
+      </div>
+    <% end %>
+
+
+  </div>
+
+
 </div>
 
-<div id="remote-message" class="alert alert-success" style="display:none"></div>
+<div id="remote-message" class="alert alert-success" style="display:none; text-algin:center"></div>
 
 
 <div style=" width:100%" id="current-entries"></div>
@@ -18,64 +39,10 @@
 
 
 <script>
-  $( document ).ready(function() {
-    
-    // Basic layout of entries
-
-      refreshEntries();
-      
-      $('#new_entry').on('ajax:success', function(event, xhr, status) {
-        // insert the failure message inside the "#account_settings" element
-          refreshEntries();
-          clearForm()
-        });
-
-      $('#new_entry').on('ajax:error', function(event, xhr, status) {
-        // insert the failure message inside the "#account_settings" element
-         
-         alert('something wicked this way comes...')
-        });
-
-
-        function refreshEntries(){
-          //console.log('loading entires')
-          $('#current-entries').html("loading");
-          $('#current-entries').load('/entries?widget', pauseFilter());  
-         }
-
-          function pauseFilter(el) { 
-              setTimeout(
-                  function() { filterEntries(); }, 500);
-                  } 
-
-        function clearForm(){
-          $('input.to-clear').val("");
-          }
-
-        function filterEntries(){
-            var toHide = $('input.dev-filter:not(:checked)') 
-            var toShow = $('input.dev-filter:checked') 
-
-            //console.log(toShow)
-            //console.log(toHide)
-            //console.log ( $('div') )  
-
-            toHide.each(function(){
-              $('tr').filter('#'+ $(this).attr('id')).fadeOut()
-            })
-            toShow.each(function(){
-              $('tr').filter('#'+ $(this).attr('id')).fadeIn()
-            })            
-          }
-
-
-          $('input.dev-filter').click(function(){
-              filterEntries();
-          })
-
-    });
+$( document ).ready(function() {
  
-
+ refreshEntries();
+});
 
     </script>
 

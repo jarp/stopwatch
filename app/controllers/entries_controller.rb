@@ -1,20 +1,14 @@
 class EntriesController < ApplicationController
 
   before_filter :require_login
-    
+  layout 'widget'
   # GET /entries
   # GET /entries.json
   def index
     @entries = Entry.open
 
-    if params.has_key? :widget
-      show_layout = false
-    else
-      show_layout = true
-    end
-    
     respond_to do |format|
-      format.html  { render :layout => show_layout }
+      format.html  #{ render :layout => show_layout }
       format.json { render json: @entries }
     end
   end

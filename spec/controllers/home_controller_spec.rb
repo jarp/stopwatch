@@ -18,6 +18,7 @@ let(:valid_session) { { user: {id: 1, email: 'test@test.com', name: 'tester'} } 
       expect(response).to be_success
       expect(assigns(:developers)).to_not be_nil
       expect(assigns(:entry)).to_not be_nil 
+      expect(assigns(:projects)).to_not be_nil 
 
     end
   end

@@ -5,6 +5,7 @@ class HomeController < ApplicationController
   def index
   	@entry = Entry.new
     @developers = Developer.all
+    @projects = Project.all
   end
 
   def login

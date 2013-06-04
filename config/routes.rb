@@ -14,6 +14,9 @@ Stopwatch::Application.routes.draw do
   match '/manage/invoices/removeEntry/:entry_id' => 'manage/invoices#removeEntry'
   match '/manage/entries/invoice/:id' => 'manage/entries#invoice'
 
+  match '/manage/invoices/submit/:id' => 'manage/invoices#submit'
+  match '/manage/invoices/unsubmit/:id' => 'manage/invoices#unsubmit'
+
   namespace :manage do
     resources :categories, :tags, :projects, :developers, :entries, :home, :invoices
   end

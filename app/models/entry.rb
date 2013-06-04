@@ -12,7 +12,13 @@ class Entry < ActiveRecord::Base
 	after_initialize :default_values
   #before_validation :convert_dates
 
-  scope :open, where(:invoice_date => nil)
+  #scope :open, where(:invoice_date => nil)
+  #scope :open, joins(:invoice).where('send_date = nil')
+  scope :unassigned, where(:invoice_id => nil)
+  scope :assigned, includes(:invoice).where("invoices.sent_date <> '2013-3-23'")
+  scope :open, includes(:invoice).where("invoices.sent_date is NULL")
+
+
 
   def convert_dates
     self.date = Date.strptime(self.date, '%m/%d/%Y')
@@ -35,8 +41,7 @@ class Entry < ActiveRecord::Base
   def date_is_legit
     errors.add(:date, "must be a valid date but was [#{date}]") 
     	if ( (Date.strptime(date, '%m/%d/%Y') rescue ArgumentError) == ArgumentError)
-    end
-  end
+    end  end
 
   def payment
     ratio * category.rate
