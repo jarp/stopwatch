@@ -191,7 +191,6 @@ DEPENDENCIES
   pg
   rails (= 3.2.13)
   rails-console-tweaks
-  rb-fsevent
   rspec-rails
   ruby-prof
   sass-rails (~> 3.2.3)
