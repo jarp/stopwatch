@@ -1,13 +1,6 @@
-class EntriesController < ApplicationController
-
-  before_filter :require_login
-  
-  
-  layout 'widget', :except => [:index]
-  layout 'xby8'
-  # GET /entries
-  # GET /entries.json
- 
+class InvoicesController < ApplicationController
+  # GET /invoices
+  # GET /invoices.json
 
 def submit
     @invoice = Invoice.find(params[:id])
@@ -15,7 +8,7 @@ def submit
     
      respond_to do |format|
       if @invoice.save
-        format.html { redirect_to invoice(@invoice), notice: 'Invoice was processed.' }
+        format.html { redirect_to invoice_path(@invoice), notice: 'Invoice was processed.' }
         format.json { render json: @invoice}
       else
         format.html { render action: "current" }
@@ -85,26 +78,24 @@ def submit
   end
 
 
-
   def index
-    @entries = Entry.open
+    @invoices = Invoice.all
 
     respond_to do |format|
-      format.html  #{ render :layout => show_layout }
-      format.json { render json: @entries }
+      format.html # index.html.erb
+      format.json { render json: @invoices }
     end
   end
 
-  # GET /entries/1
-  # GET /entries/1.json
+  # GET /invoices/1
+  # GET /invoices/1.json
   def show
-    @entry = Entry.find(params[:id])
+    @invoice = Invoice.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @entry }
+      format.json { render json: @invoice }
     end
   end
-
 
 end

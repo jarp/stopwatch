@@ -1,0 +1,45 @@
+<% total_amount = 0 %>
+
+<% unless params.has_key? :widget %>   
+<h1>Current Invoice for <%= @invoice.project.name %></h1>
+<% end %>
+
+<div class="well">
+  <p>Email: <%= @invoice.developer.email %></p>
+</div>
+
+
+<table class="table table-bordered table-striped table-hover">
+  <tr>
+
+    <th>Date</th>
+    <th>Time</th>
+    <th>Description</th>
+    <th>Category</th>
+  </tr>
+
+
+
+<% @entries.each do |entry| %>
+  <% total_amount += entry.payment %>
+  <tr>
+    <td><%= entry.date %></td>
+    <td><%= entry.hours %> / <%= entry.payment %></td>
+    <td><%= truncate(entry.description, :length => 20) %></td>
+    <td><%= entry.category.code %></td>
+  </tr>
+<% end %>
+</table>
+
+<div class="well">
+  <p>Total to bill: <%= total_amount %></p>
+</div>
+<div class="pull-right">
+<% if @invoice.submitted? %>
+  <%= button_to "Unsubmit Invoice", "/invoices/unsubmit/#{@invoice.id}"%>
+<% else %>
+  <%= button_to "Process Invoice", "/invoices/submit/#{@invoice.id}", :class=>'btn btn-primary'%>
+<% end %>
+</div>
+
+

@@ -7,13 +7,13 @@ Stopwatch::Application.routes.draw do
   get "/logout" => 'home#logout', :as => :logout
 
   
-  match '/manage/invoices/current/:project_id' => 'manage/invoices#current'
-  match '/manage/invoices/addEntry/:entry_id' => 'manage/invoices#addEntry'
-  match '/manage/invoices/removeEntry/:entry_id' => 'manage/invoices#removeEntry'
+  match '/invoices/current/:project_id' => 'invoices#current'
+  match '/invoices/addEntry/:entry_id' => 'invoices#addEntry'
+  match '/invoices/removeEntry/:entry_id' => 'invoices#removeEntry'
   match '/manage/entries/invoice/:id' => 'manage/entries#invoice'
 
-  match '/manage/invoices/submit/:id' => 'manage/invoices#submit'
-  match '/manage/invoices/unsubmit/:id' => 'manage/invoices#unsubmit'
+  match '/invoices/submit/:id' => 'invoices#submit'
+  match '/invoices/unsubmit/:id' => 'invoices#unsubmit'
 
   resources :entries
   resources :invoices

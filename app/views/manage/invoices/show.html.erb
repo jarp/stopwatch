@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Developer:</b>
+  <%= @invoice.developer %>
+</p>
+
+<p>
+  <b>Project:</b>
+  <%= @invoice.project %>
+</p>
+
+<p>
+  <b>Sent date:</b>
+  <%= @invoice.sent_date %>
+</p>
+<div class="well">
+<ul>
+<% @invoice.entries.each do | entry | %>
+<li><%= "#{entry.description} :: #{entry.time}" %></li>
+<% end %>
+</ul>
+</div>
+
+
+<% if @invoice.submitted? %>
+	<%= link_to "unsubmit", "/manage/invoices/unsubmit/#{@invoice.id}" %>
+  <% else %>
+	<%= link_to "submit", "/manage/invoices/submit/#{@invoice.id}" %>
+<% end %>
+
+
+<%= link_to 'Edit', edit_manage_invoice_path(@invoice) %> |
+<%= link_to 'Back', manage_invoices_path %>

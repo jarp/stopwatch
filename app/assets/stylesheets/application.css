@@ -13,8 +13,75 @@
  *= require jquery.ui.datepicker
  */
 
-body { padding-top: 60px; } 
+body { padding-top: 60px; background-color: #f2f2f2 } 
 
 
 div#remote-message a{color:#fff;}
 div#remote-message a:visited{color:#fff;}
+
+/*
+div.card {
+	border-radius: 2px;
+	border:thin solid #FAFAF0;
+	background-color: #fff;
+	-moz-box-shadow: 3px 3px 4px #ccc;
+	-webkit-box-shadow: 3px 3px 4px #ccc;
+	box-shadow: 3px 3px 4px #ccc;
+
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#ccc')";
+
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#ccc');
+}
+*/
+ul.gNow {
+	width: 450px;
+	height: 100%;
+	float: left;
+	padding: 0;
+}
+ul.gNow li {
+	width: 430px;
+	float: left;
+	list-style: none;
+	padding: 10px;
+}
+div.card {
+	background: #fff;
+	width: 400px;
+	position: relative;
+	padding: 15px;
+	box-shadow: 0px 3px 3px 3px rgba( 0, 0, 0, 0.1 );
+	font-family: Open Sans;
+	color: #444;
+	font-size: 14px;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
+	}
+	div.card p {
+		margin: 0 0 15px 0;
+	}
+	div.card p.card-title {
+		font-size: 28px;
+	}
+	div.card p.url {
+		border-top: 1px solid #e5e5e5;
+		background-image: url('http://www.eriklindemann.com/wp-content/uploads/2013/05/url.png');
+		background-repeat: no-repeat;
+		padding: 6px 0 0 30px;
+		height: 30px;
+		display: block;
+		margin-bottom: -10px;
+	}
+	div.card p.url a {
+		color: #04bff4;
+		text-decoration: none;
+		top: 4px;
+		width: 385px;
+		display: block;
+		position: relative;
+	}
+	div.card img.full {
+	width: 430px;
+	margin: 0 0 15px -15px;
+	}

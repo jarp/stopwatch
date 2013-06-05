@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Date:</b>
+  <%= @entry.date %>
+</p>
+
+<p>
+  <b>Hours:</b>
+  <%= @entry.hours %>
+</p>
+
+<p>
+  <b>Cost:</b>
+  $<%= @entry.payment %>  
+</p>
+
+
+
+<p>
+  <b>Invoiced?:</b>
+  <%= @entry.invoiced? %>  
+</p>
+
+
+<p>
+  <b>Description:</b>
+  <%= @entry.description %>
+</p>
+
+<p>
+  <b>Developer:</b>
+  <%= @entry.developer %>
+</p>
+
+<p>
+  <b>Project:</b>
+  <%= @entry.project %>
+</p>
+
+<p>
+  <b>Category:</b>
+  <%= @entry.category %>
+</p>
+
+
+<%= link_to 'Edit', edit_manage_entry_path(@entry) %> |
+<%= link_to 'Back', manage_entries_path %>
+
+<%= debug @entry %>

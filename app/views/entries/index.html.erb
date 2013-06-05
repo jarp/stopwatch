@@ -27,10 +27,9 @@
     <td><%= entry.project %></td>
     <td><%= entry.category.code %></td>
     <td>
-    <%= button_to 'Show', manage_entry_path(entry), :class => 'btn btn-small', :method => :get %>
-    <% unless params.has_key? :widget %>    
-        <%= link_to 'Edit', edit_manage_entry_path(entry) %> | 
-        <%= link_to 'Destroy', manage_entry_path(entry), method: :delete, data: { confirm: 'Are you sure?' } %>
+    <%= link_to 'Show', entry_path(entry), :class => 'btn btn-small', :method => :get %>
+    <% if entry.invoice %>
+        <%= link_to 'Invoice', invoice_path(entry.invoice), :class => 'btn btn-small', :method => :get %>
     <% end %>
     </td>
 
