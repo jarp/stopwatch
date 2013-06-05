@@ -76,9 +76,12 @@ describe InvoicesController do
       pending "not test"
     end
 
-    it "should show the current invoice for project if only one project is available"
-      pending "no test"
+    it "should show the current invoice for project if only one project is available" do
+      get :current, {}, valid_session
+        expect(assigns(:entries)).to_not be_nil
+        expect(assigns(:invoice)).to_not be_nil      
     end
+ end
 
   
 
@@ -107,15 +110,21 @@ describe InvoicesController do
 
 
     it "removes an invoice" do
-     
   
-      @entry.invoice_id = @invoice.id
-      @entry.save
-      @entry2.invoice_id = @invoice.id
-      @entry2.save
+    @entry3 = FactoryGirl.create(:entry, {description: "first entry for test", developer_id: @developer.id, project_id: @project.id})
+    @entry4 = FactoryGirl.create(:entry, {description: "second entry for test", developer_id: @developer.id, project_id: @project.id})
+    @invoice2 = FactoryGirl.create(:invoice)
+  
 
-      @invoice_before = Invoice.find(@invoice.id)
-      
+      @entry3.invoice_id = @invoice2.id
+      @entry3.save
+      @entry4.invoice_id = @invoice2.id
+      @entry4.save
+
+      @invoice_before = Invoice.find(@invoice2.id)
+      pp @entry3
+      pp @entry4
+      pp @project
 
       expect(@invoice_before.entries.count).to eq 2
 
@@ -124,13 +133,13 @@ describe InvoicesController do
       request.stub :content_mime_type => mime_type
       request.accept = 'application/json'
 
-      get :removeEntry, {entry_id: @entry.id}, valid_session
+      get :removeEntry, {entry_id: @entry3.id}, valid_session
 
       expect(response.code).to eq  "200"
       expect(assigns(:invoice)).to_not be_nil
 
       #pp assigns(:invoice)
-      @invoice_after = Invoice.find(@invoice.id)
+      @invoice_after = Invoice.find(@invoice2.id)
       expect(@invoice_after.entries.count).to eq 1
 
       @invoice_before.destroy

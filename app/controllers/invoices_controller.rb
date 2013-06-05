@@ -25,8 +25,17 @@ def submit
 
   end
 
+
+
   def current
+     
+    unless params[:project_id]
+      @developer = Developer.find(session[:user][:id])
+      @invoice = @developer.projects.first
+    end
+
     @invoice = Invoice.current(session[:user][:id], params[:project_id])
+
     @entries = @invoice.entries
   end
 

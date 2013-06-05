@@ -4,6 +4,8 @@ class Developer < ActiveRecord::Base
 
   has_many :entries
   has_many :invoices, :dependent => :destroy
+
+  has_many :projects, :through => :entries
   
 
   def to_s 
