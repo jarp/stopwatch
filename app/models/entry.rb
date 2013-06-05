@@ -14,10 +14,22 @@ class Entry < ActiveRecord::Base
 
   #scope :open, where(:invoice_date => nil)
   #scope :open, joins(:invoice).where('send_date = nil')
-  scope :unassigned, where(:invoice_id => nil)
-  scope :assigned, includes(:invoice).where("invoices.sent_date <> '2013-3-23'")
-  scope :open, includes(:invoice).where("invoices.sent_date is NULL")
+  
 
+  #invoiced means attached to an invoice that is processed
+  scope :invoiced, includes(:invoice).where("invoices.sent_date is not NULL")
+  
+  # orphened means no invoice attached
+  scope :orphan, where(:invoice_id => nil)
+
+  #assigned means attached to an inoice that has not been processed
+  scope :assigned, joins(:invoice).where("invoices.sent_date is NULL")
+
+  
+
+  def self.available
+    Entry.orphan << Entry.assigned
+  end
 
 
   def convert_dates

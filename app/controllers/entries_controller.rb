@@ -3,12 +3,27 @@ class EntriesController < ApplicationController
   before_filter :require_login
   
   
-  layout 'widget', :except => [:index]
-  layout 'xby8'
+  #layout 'xby8', :only => [:show]
+  layout 'widget'
   # GET /entries
   # GET /entries.json
  
+def create
+    
+    @entry = Entry.new(params[:entry])
+    @entry.date = Date.strptime(params[:entry][:date], '%m/%d/%Y')
+    
+    respond_to do |format|
+      if @entry.save
+        format.html { redirect_to manage_entry_path( @entry ), notice: 'Entry was successfully created.' }
+        format.json { render json: @entry, status: :created, location: @entry }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @entry.errors, status: :unprocessable_entity }
+      end
+    end
 
+  end
 def submit
     @invoice = Invoice.find(params[:id])
     @invoice.sent_date = Time.now
@@ -87,7 +102,29 @@ def submit
 
 
   def index
-    @entries = Entry.open
+    
+    if params[:email] 
+    
+      @developer = Developer.find_by_email( params[:email] )
+      @entries = @developer.entries.orphan
+      e = @developer.entries.assigned 
+
+      e.each do | ent |
+        @entries << ent
+      end
+
+    else
+      
+      @entries = Entry.orphan
+      e = Entry.assigned 
+
+      e.each do | ent |
+        @entries << ent
+      end
+
+    end
+
+    @entries.sort_by! { |e| e.date }
 
     respond_to do |format|
       format.html  #{ render :layout => show_layout }

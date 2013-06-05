@@ -13,35 +13,48 @@ describe "custom scopes" do
 		@invoice = FactoryGirl.create(:invoice)
 		@invoiced = FactoryGirl.create(:invoice, {sent_date: "2013-3-23"})
 		@project = FactoryGirl.create(:project)
+
+		#create 4 entries
+		# 2 unassigned
+		# 1 assigned but not invoices
+		# 1 assigned and invoiced
+
 		FactoryGirl.create(:entry, {project_id: @project.id})		
 		FactoryGirl.create(:entry, {project_id: @project.id})		
 		FactoryGirl.create(:entry, {project_id: @project.id, invoice_id: @invoice.id})		
+		FactoryGirl.create(:entry, {project_id: @project.id, invoice_id: @invoiced.id})	
 	end
 	
-	
-	it "returns all unassigned entrys as a class method" do 
-		@unassigned_entries = Entry.unassigned
-		expect(@unassigned_entries).to_not be_nil
-		expect(@unassigned_entries.count).to eq 2
+	it "should return all open entries (not invoiced)" do 
+		@open_entries = Entry.available
+		expect(@open_entries).to_not be_nil
+		expect(@open_entries.count).to eq 3
+		expect(@open_entries.first).to be_a_kind_of Entry
+	end	
 
+
+	it "returns all unassigned entrys as a class method" do 
+		@unassigned_entries = Entry.invoiced
+		expect(@unassigned_entries).to_not be_nil
+		expect(@unassigned_entries.count).to eq 1
 	end
 
 	it "returns all uninvoiced entrys as a class method" do 
 	
-		FactoryGirl.create(:entry, {project_id: @project.id, invoice_id: @invoiced.id})	
-
-		@open_entries = Entry.open
+		@open_entries = Entry.orphan
 		expect(@open_entries).to_not be_nil
-		expect(@open_entries.count).to eq 3
+		expect(@open_entries.count).to eq 2
 
 	end
 
 	it "returns all assigned entrys as a class method" do 
-		FactoryGirl.create(:entry, {project_id: @project.id, invoice_id: @invoice.id})	
-		FactoryGirl.create(:entry, {project_id: @project.id, invoice_id: @invoiced.id})	
+		
 		@assigned_entries = Entry.assigned
+		pp @assigned_entries
 		expect(@assigned_entries).to_not be_nil
-		expect(@assigned_entries.count).to eq 2
+		expect(@assigned_entries.count).to eq 1
+		expect(@assigned_entries.developer).to_not be_nil
+
 
 	end
 

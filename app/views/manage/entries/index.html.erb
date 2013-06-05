@@ -9,9 +9,9 @@
     <th>Developer</th>
     <th>Project</th>
     <th>Category</th>
-    <% unless params.has_key? :widget %>    
-        <th></th>
-    <% end %>
+    <th>Invoice</th>
+    <th></th>
+    
   </tr>
 
 <% @entries.each do |entry| %>
@@ -22,12 +22,12 @@
     <td><%= entry.developer %></td>
     <td><%= entry.project %></td>
     <td><%= entry.category %></td>
-    <% unless params.has_key? :widget %>    
-        <td>
-        <%= link_to 'Show', manage_entry_path(entry) %> | 
-        <%= link_to 'Edit', edit_manage_entry_path(entry) %> | 
-        <%= link_to 'Destroy', manage_entry_path(entry), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    <% end %>
+    <td><%= entry.invoice_id %>
+    <td>
+        <%= link_to 'Show', manage_entry_path(entry), :class => "btn btn-primary btn-small" %> 
+        <%= link_to 'Edit', edit_manage_entry_path(entry) , :class => 'btn btn-small' %> 
+        <%= link_to 'Destroy', manage_entry_path(entry), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-small' %></td>
+    
 
   </tr>
 <% end %>

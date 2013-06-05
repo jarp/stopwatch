@@ -2,9 +2,9 @@
 
 FactoryGirl.define do
   factory :developer do
-    first_name "MyString"
-    last_name "MyString"
-    email "MyString"
-    password "MyString"
+    first_name "Test"
+    last_name "McDev"
+    email "test@test.com"
+    password "go irish"
   end
 end

@@ -15,11 +15,14 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+gem 'rails-console-tweaks'
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 
-
+group :console do
+  gem 'hirb'
+end
 
 group :development do 
 	gem 'sqlite3'	
@@ -27,7 +30,7 @@ end
 
 group :test do 
 	gem 'sqlite3'	
-  #gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
+  gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
   gem 'guard-rspec'
   gem 'growl'
   gem 'ruby-prof'
