@@ -18,7 +18,7 @@
 <% @entries.each do |entry| %>
 
 
-  <tr id = "<%= entry.developer.id %>" projectId='<%=entry.project_id %>'>
+  <tr id = "<%= entry.developer.id %>" projectId='<%=entry.project_id %>' dev="<%= entry.developer.email %>">
     <td><%= check_box_tag "entry-#{entry.id}", entry.id,  entry.invoice, {:class=> "entry-checkbox"} %></td>
     <td><%= entry.date %></td>
     <td><%= entry.hours %> / <%= entry.payment %></td>

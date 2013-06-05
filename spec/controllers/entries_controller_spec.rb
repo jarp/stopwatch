@@ -9,8 +9,7 @@ let(:valid_post) { {
                     hours: '1h 45m', 
                     description: "my test work",
                     project_id: @project.id, 
-                    category_id: @category.id, 
-                    developer_id: @developer.id
+                    category_id: @category.id
                   }
                     } }
   
@@ -59,7 +58,7 @@ let(:valid_post) { {
       #pp assigns(:entries)
     end
 
-    it "posts a new entry" do
+    it "posts a new entry using session for dev id" do
       mime_type = mock
       mime_type.stub :ref => :json
       request.stub :content_mime_type => mime_type

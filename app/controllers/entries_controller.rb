@@ -11,6 +11,7 @@ class EntriesController < ApplicationController
 def create
     
     @entry = Entry.new(params[:entry])
+    @entry.developer_id = session[:user][:id]
     @entry.date = Date.strptime(params[:entry][:date], '%m/%d/%Y')
     
     respond_to do |format|
