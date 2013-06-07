@@ -1,36 +1,10 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Date:</b>
-  <%= @entry.date %>
-</p>
-
-<p>
-  <b>Hours:</b>
-  <%= @entry.hours %>
-</p>
-
-<p>
-  <b>Cost:</b>
-  $<%= @entry.payment %>  
-</p>
-
-
-
-<p>
-  <b>Invoiced?:</b>
-  <%= @entry.invoiced? %>  
-</p>
-
-
-<p>
-  <b>Description:</b>
-  <%= @entry.description %>
-</p>
+  <h3><%= @entry.date %></h3>
 
 <p>
   <b>Developer:</b>
-  <%= @entry.developer %>
+  <%= @entry.developer.full_name %>
 </p>
 
 <p>
@@ -43,8 +17,26 @@
   <%= @entry.category %>
 </p>
 
+<div class="well">
 
-<%= link_to 'Edit', edit_manage_entry_path(@entry) %> |
-<%= link_to 'Back', manage_entries_path %>
+<p>
+  <b>Hours:</b>
+  <%= @entry.hours %> / $<%= @entry.payment %>  
+</p>
 
-<%= debug @entry %>
+<p>
+  <b>Description:</b><br/>
+  <%= @entry.description %>
+</p>
+
+<% if @entry.invoiced? %>
+  <p><i>This entry has been invoiced </i></p>
+<% end %>
+
+
+</div>
+
+
+
+<%= link_to 'Edit', edit_manage_entry_path(@entry), :class=> 'btn' %> 
+<%= link_to 'Back', home_path, :class=> 'btn btn-primary' %>

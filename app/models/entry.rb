@@ -1,5 +1,5 @@
 class Entry < ActiveRecord::Base
-  attr_accessible :date, :description, :time,  :hours, :project_id, :developer_id, :category_id, :invoice_date
+  attr_accessible :date, :description, :time,  :hours, :project_id, :developer_id, :category_id, :invoice_date, :state
 
   belongs_to :developer
   belongs_to :project
@@ -9,28 +9,14 @@ class Entry < ActiveRecord::Base
 
   validates :date, :description, :hours,:developer_id, :project_id, :category_id,  :presence => true
 
-	after_initialize :default_values
-  #before_validation :convert_dates
+	after_create :default_values
+  before_save :set_state
 
-  #scope :open, where(:invoice_date => nil)
-  #scope :open, joins(:invoice).where('send_date = nil')
+  scope :invoiced, where(:state => 'invoiced')
+  scope :orphan, where(:state => 'orphan')
+  scope :assigned, where(:state => 'assigned')
+  scope :available, where("state <> 'invoiced'")
   
-
-  #invoiced means attached to an invoice that is processed
-  scope :invoiced, includes(:invoice).where("invoices.sent_date is not NULL")
-  
-  # orphened means no invoice attached
-  scope :orphan, where(:invoice_id => nil)
-
-  #assigned means attached to an inoice that has not been processed
-  scope :assigned, joins(:invoice).where("invoices.sent_date is NULL")
-
-  
-
-  def self.available
-    Entry.orphan << Entry.assigned
-  end
-
 
   def convert_dates
     self.date = Date.strptime(self.date, '%m/%d/%Y')
@@ -44,10 +30,7 @@ class Entry < ActiveRecord::Base
     end
   end
 
-  def default_values
-    d = Time.new
-    self.date ||= Time.new.strftime('%m/%d/%Y')
-  end
+
   
 
   def date_is_legit
@@ -83,5 +66,24 @@ class Entry < ActiveRecord::Base
     return ( (h.to_f * 60) + (m.to_f ) )/ 60 
   end
 
+  #private 
+
+  def default_values
+    d = Time.new
+    self.date ||= Time.new.strftime('%m/%d/%Y')
+    self.state = "orphan"
+  end
+
+  def set_state
+    if self.invoice && self.invoice.sent_date
+      self.state = 'invoiced'
+    
+    elsif self.invoice_id.nil?
+      self.state = 'orphan'
+    else
+      self.state = 'assigned'
+    end
+
+  end
 
 end

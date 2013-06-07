@@ -3,8 +3,9 @@
 FactoryGirl.define do
   factory :entry do
     date "2013-05-27"
-    description "MyText"
-    hours "MyString"
+    description "Basic Description..."
+    hours "1h"
+    #state ""
     developer 
     project 
     category 

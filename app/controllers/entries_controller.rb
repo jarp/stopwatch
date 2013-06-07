@@ -3,8 +3,9 @@ class EntriesController < ApplicationController
   before_filter :require_login
   
   
+  
   #layout 'xby8', :only => [:show]
-  layout 'widget'
+  
   # GET /entries
   # GET /entries.json
  
@@ -108,27 +109,17 @@ def submit
     
       @developer = Developer.find_by_email( params[:email] )
       @entries = @developer.entries.orphan
-      e = @developer.entries.assigned 
-
-      e.each do | ent |
-        @entries << ent
-      end
+      @entries = @developer.entries.available
 
     else
       
-      @entries = Entry.orphan
-      e = Entry.assigned 
-
-      e.each do | ent |
-        @entries << ent
-      end
-
+      @entries = Entry.available
     end
 
     @entries.sort_by! { |e| e.date }
 
     respond_to do |format|
-      format.html  #{ render :layout => show_layout }
+      format.html  { render :layout => 'widget' }
       format.json { render json: @entries }
     end
   end

@@ -5,11 +5,21 @@ describe Entry do
 
 	let(:entry) { entry = FactoryGirl.build(:entry, {date: "3/23/2013", hours:"35m"})	 }
 
+
+describe "basic properties" do
+
+	it "should have state and" do 
+		@entry = FactoryGirl.create(:entry)
+		pp 	@entry
+		expect(@entry.state).to_not be_nil
+		@entry.destroy		
+	end
+end
+
+
 describe "custom scopes" do 
 	
-	before(:all) do
-		pp "before all"
-		Entry.destroy_all
+	before(:each) do
 		@invoice = FactoryGirl.create(:invoice)
 		@invoiced = FactoryGirl.create(:invoice, {sent_date: "2013-3-23"})
 		@project = FactoryGirl.create(:project)
@@ -23,6 +33,12 @@ describe "custom scopes" do
 		FactoryGirl.create(:entry, {project_id: @project.id})		
 		FactoryGirl.create(:entry, {project_id: @project.id, invoice_id: @invoice.id})		
 		FactoryGirl.create(:entry, {project_id: @project.id, invoice_id: @invoiced.id})	
+	end
+
+	after(:each) do 
+		Invoice.destroy_all
+		Project.destroy_all
+		Entry.destroy_all
 	end
 	
 	it "should return all open entries (not invoiced)" do 
@@ -48,33 +64,16 @@ describe "custom scopes" do
 	end
 
 	it "returns all assigned entrys as a class method" do 
-		
 		@assigned_entries = Entry.assigned
-		pp @assigned_entries
+		pp @assigned_entries.first
 		expect(@assigned_entries).to_not be_nil
 		expect(@assigned_entries.count).to eq 1
-		expect(@assigned_entries.developer).to_not be_nil
-
+		expect(@assigned_entries.first.developer).to_not be_nil
+		
 
 	end
 
 end
-
-
-
-=begin
-	it "converts date before validation" do 
-		@entry = FactoryGirl.create(:entry, {date: "5/24/2013", hours:"35m"})		
-		expect(@entry.date).to_not be_nil
-		pp @entry
-		@entry.destroy
-	end
-	it "accepts basic date" do
-		entry = FactoryGirl.build(:entry, {date: "5/24/2013", hours:"35m"})		
-		expect(entry.date).to_not be_nil
-	end
-  
-=end
 
   	describe "the ratio method" do 
 	
@@ -116,24 +115,13 @@ end
 
 		end
 
-		it "should update entry with current date as invoice date if invoice is called" do
-			pending "no test"
-		end
+		
 	end
 
 
 	describe "validation methods" do 
 		
 
-		it "should validate date" do 
-			pending "needs test"
-=begin
-			entry = FactoryGirl.build(:entry, {date: DateTime.new, hours:"35m"})
-			entry.valid?
-			pp entry.errors
-			expect(entry.errors).to be_nil
-=end
-		end
 	end
 
 

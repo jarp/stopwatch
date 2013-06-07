@@ -13,7 +13,7 @@ let(:valid_post) { {
                   }
                     } }
   
-  before(:all) do 
+  before(:each) do 
     Entry.destroy_all
     Developer.destroy_all
     Project.destroy_all
@@ -23,7 +23,7 @@ let(:valid_post) { {
     @category = FactoryGirl.create(:category)
   end
 
-  after(:all) do
+  after(:each) do
     @project.destroy
     @category.destroy
     @developer.destroy

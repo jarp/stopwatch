@@ -1,5 +1,10 @@
 $( document ).ready(function() {
 
+    //var email = hashBang.getEmail();
+    //console.log(email);
+    //hashBang.setEmail('jarp@nd.edu')
+
+    
     function setRemoteMessage(msg){
         $('div#remote-message').html(msg).fadeIn();
        // console.log("message is: " + msg)

@@ -1,31 +1,34 @@
 require 'spec_helper'
 
 describe InvoicesController do
-  
+
   let(:valid_attributes) { { "developer_id" => @developer.id, "project_id" => @project.id } }
   let(:valid_session) { { user: {id: @developer.id, email: 'test@test.com', name: 'tester'} } }
 
-  before(:all) do 
-    Invoice.destroy_all
-    
-    @project = FactoryGirl.create(:project)
-    @developer = FactoryGirl.create(:developer)
-    @entry = FactoryGirl.create(:entry, {description: "first entry for test", developer_id: @developer.id, project_id: @project.id})
-    @entry2 = FactoryGirl.create(:entry, {description: "second entry for test", developer_id: @developer.id, project_id: @project.id})
-    @invoice = FactoryGirl.create(:invoice)
-  
-  end
+   before(:all) do 
+      Invoice.destroy_all
+      @project = FactoryGirl.create(:project)
+      @developer = FactoryGirl.create(:developer)
+      @entry = FactoryGirl.create(:entry, {description: "first entry for test", developer_id: @developer.id, project_id: @project.id})
+      @entry2 = FactoryGirl.create(:entry, {description: "second entry for test", developer_id: @developer.id, project_id: @project.id})
+      @invoice = FactoryGirl.create(:invoice)
+    end
 
-  after(:all) do
-  	@project.destroy
-  	@developer.destroy
-    @invoice.destroy
-    @entry.destroy
-    @entry2.destroy
-  end
+    after(:all) do
+      @project.destroy
+      @developer.destroy
+      @invoice.destroy
+      @entry.destroy
+      @entry2.destroy
+    end
 
 
-  describe "process invoices" do
+
+  describe "Invoice processing" do
+ 
+    before(:each) do 
+      puts "invoice rendering now..."
+    end
 
     it "submitting an invoice" do
       
@@ -49,15 +52,19 @@ describe InvoicesController do
   end
 
 
-  describe "current invoice" do 
+  describe "Incoice rendering" do 
 
+
+    before(:each) do 
+      puts "before all for rendering"
+    end
 
     it "should be my current invoice with entires" do
       @entry.invoice_id = @invoice.id
       @entry.save
       @entry2.invoice_id = @invoice.id
       @entry2.save
-      #pp @invoice.entries
+      
       get :current, {project_id: @project.id}, valid_session
       
       expect(assigns(:invoice)).to_not be_nil
@@ -111,21 +118,17 @@ describe InvoicesController do
 
     it "removes an invoice" do
   
-    @entry3 = FactoryGirl.create(:entry, {description: "first entry for test", developer_id: @developer.id, project_id: @project.id})
-    @entry4 = FactoryGirl.create(:entry, {description: "second entry for test", developer_id: @developer.id, project_id: @project.id})
-    @invoice2 = FactoryGirl.create(:invoice)
-  
-
-      @entry3.invoice_id = @invoice2.id
-      @entry3.save
-      @entry4.invoice_id = @invoice2.id
-      @entry4.save
+       @entry3 = FactoryGirl.create(:entry, {description: "first entry for test", developer_id: @developer.id, project_id: @project.id})
+       @entry4 = FactoryGirl.create(:entry, {description: "second entry for test", developer_id: @developer.id, project_id: @project.id})
+       @invoice2 = FactoryGirl.create(:invoice)
+    
+       @entry3.invoice_id = @invoice2.id
+       @entry3.save
+       @entry4.invoice_id = @invoice2.id
+       @entry4.save
 
       @invoice_before = Invoice.find(@invoice2.id)
-      pp @entry3
-      pp @entry4
-      pp @project
-
+ 
       expect(@invoice_before.entries.count).to eq 2
 
       mime_type = mock
